@@ -18,13 +18,16 @@
 # definitions or other modules.
 #
 class ambari::repo {
+  
+  $operatingsystemmajorrelease = regsubst($::operatingsystemrelease, '([^.]*)[.].*', '\1')
+  
   case $::osfamily {
     'RedHat': {
       yumrepo { 'ambari':
         descr    => 'ambari',
-        baseurl  => 'http://cobbler200.athenahealth.com/LocalRepo/ambari/centos6/1.x/updates/1.7.0/',
+        baseurl  => $::ambari::yum_baseurl,
         gpgcheck => 1,
-        gpgkey   => 'http://cobbler200.athenahealth.com/LocalRepo/ambari/centos6/1.x/updates/1.7.0/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins',
+        gpgkey   => $::ambari::yum_gpgkey,
         enabled  => 1,
       }
     }

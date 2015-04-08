@@ -11,6 +11,8 @@ class ambari (
   $serverhostname     = 'localhost',
   $agent_package_name = $::ambari::params::agent_package_name,
   $agent_service_name = $::ambari::params::agent_service_name,
+  $yum_baseurl        = $::ambari::params::yum_baseurl,
+  $yum_gpgkey         = $::ambari::params::yum_gpgkey,
 ) inherits ::ambari::params {
 
   validate_string($serverhostname)
