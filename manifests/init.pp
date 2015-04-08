@@ -15,6 +15,7 @@ class ambari (
 
   validate_string($serverhostname)
 
+  class { '::ambari::repo': } ->
   class { '::ambari::agent_install': } ->
   class { '::ambari::agent_config': } ~>
   class { '::ambari::agent_service': } ->
