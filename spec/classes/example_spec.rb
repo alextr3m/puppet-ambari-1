@@ -14,12 +14,12 @@ describe 'ambari' do
           it { is_expected.to compile.with_all_deps }
 
           it { is_expected.to contain_class('ambari::params') }
-          it { is_expected.to contain_class('ambari::install').that_comes_before('ambari::config') }
-          it { is_expected.to contain_class('ambari::config') }
-          it { is_expected.to contain_class('ambari::service').that_subscribes_to('ambari::config') }
+          it { is_expected.to contain_class('ambari::agent_install').that_comes_before('ambari::config') }
+          it { is_expected.to contain_class('ambari::agent_config') }
+          it { is_expected.to contain_class('ambari::agent_service').that_subscribes_to('ambari::config') }
 
-          it { is_expected.to contain_service('ambari') }
-          it { is_expected.to contain_package('ambari').with_ensure('present') }
+          it { is_expected.to contain_service('ambari-agent') }
+          it { is_expected.to contain_package('ambari-agent').with_ensure('present') }
         end
       end
     end

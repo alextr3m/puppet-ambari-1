@@ -5,13 +5,11 @@
 #
 class ambari::params {
   case $::osfamily {
-    'Debian': {
-      $package_name = 'ambari'
-      $service_name = 'ambari'
-    }
     'RedHat', 'Amazon': {
-      $package_name = 'ambari'
-      $service_name = 'ambari'
+      $agent_package_name = 'ambari-agent'
+      $agent_service_name = 'ambari-agent'
+      $server_package_name = 'ambari-server'
+      $server_service_name = 'ambari-server'
     }
     default: {
       fail("${::operatingsystem} not supported")

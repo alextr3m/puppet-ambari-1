@@ -4,18 +4,19 @@
 #
 # === Parameters
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
+# [*serverhostname*]
+#   Points to the host running ambari-server.
 #
 class ambari (
-  $package_name = $::ambari::params::package_name,
-  $service_name = $::ambari::params::service_name,
+  $serverhostname     = 'localhost',
+  $agent_package_name = $::ambari::params::agent_package_name,
+  $agent_service_name = $::ambari::params::agent_service_name,
 ) inherits ::ambari::params {
 
-  # validate parameters here
+  validate_string($serverhostname)
 
-  class { '::ambari::install': } ->
-  class { '::ambari::config': } ~>
-  class { '::ambari::service': } ->
+  class { '::ambari::agent_install': } ->
+  class { '::ambari::agent_config': } ~>
+  class { '::ambari::agent_service': } ->
   Class['::ambari']
 }
